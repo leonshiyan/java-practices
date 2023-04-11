@@ -74,6 +74,17 @@ public class SortedListToBST {
         if (node == null) return -1;
         return 1 + Math.max(height(node.left), height(node.right));
     }
+    // Helper method to check if a binary tree is height-balanced
+    private static boolean isBalanced(TreeNode node) {
+        if (node == null) return true;
+
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        return Math.abs(leftHeight - rightHeight) <= 1
+                && isBalanced(node.left)
+                && isBalanced(node.right);
+    }
 	
 
 	public static void main(String[] args) {

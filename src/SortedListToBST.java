@@ -59,7 +59,16 @@ class Solution {
 public class SortedListToBST {
 
 	public static void main(String[] args) {
-	
+		// Generate a sorted array of size 1000
+        int[] testArray = new int[1000];
+        Random rand = new Random();
+        for (int i = 0; i < 1000; i++) {
+            testArray[i] = rand.nextInt(1000);
+        }
+        Arrays.sort(testArray);
+
+        Solution solution = new Solution();
+        TreeNode root = solution.sortedArrayToBST(testArray);
 
 	}
 

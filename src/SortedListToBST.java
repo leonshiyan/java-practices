@@ -88,18 +88,24 @@ public class SortedListToBST {
 	
 
 	public static void main(String[] args) {
-		// Generate a sorted array of size 1000
+		// Generate a sorted array of size 1000 without duplicates
         int[] testArray = new int[1000];
+        int baseValue = 0;
         Random rand = new Random();
         for (int i = 0; i < 1000; i++) {
-            testArray[i] = rand.nextInt(1000);
+            baseValue += rand.nextInt(5) + 1; // Adding a random value between 1 and 5 to the base value
+            testArray[i] = baseValue;
         }
-        Arrays.sort(testArray);
 
         Solution solution = new Solution();
         TreeNode root = solution.sortedArrayToBST(testArray);
-        
-        
+
+        // Validate the resulting tree
+        boolean isValid = isValidBST(root, null, null);
+        boolean isBalancedTree = isBalanced(root);
+
+        System.out.println("Is valid BST: " + isValid);
+        System.out.println("Is height-balanced: " + isBalancedTree);
        
 
 	}

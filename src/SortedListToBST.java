@@ -57,6 +57,19 @@ class Solution {
     }
 }
 public class SortedListToBST {
+	// Helper method to check if a binary tree is a valid binary search tree
+    private static boolean isValidBST(TreeNode node, Integer lower, Integer upper) {
+        if (node == null) return true;
+
+        int val = node.val;
+        if (lower != null && val <= lower) return false;
+        if (upper != null && val >= upper) return false;
+
+        if (!isValidBST(node.right, val, upper)) return false;
+        if (!isValidBST(node.left, lower, val)) return false;
+        return true;
+    }
+	
 
 	public static void main(String[] args) {
 		// Generate a sorted array of size 1000
@@ -69,6 +82,9 @@ public class SortedListToBST {
 
         Solution solution = new Solution();
         TreeNode root = solution.sortedArrayToBST(testArray);
+        
+        
+       
 
 	}
 

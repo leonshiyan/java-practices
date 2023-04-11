@@ -58,7 +58,7 @@ class Solution {
 }
 public class SortedListToBST {
 	// Helper method to check if a binary tree is a valid binary search tree
-    private static boolean isValidBST(TreeNode node, Integer lower, Integer upper) {
+	private static boolean isValidBST(TreeNode node, Integer lower, Integer upper) {
         if (node == null) return true;
 
         int val = node.val;
@@ -68,6 +68,11 @@ public class SortedListToBST {
         if (!isValidBST(node.right, val, upper)) return false;
         if (!isValidBST(node.left, lower, val)) return false;
         return true;
+    }
+	// Helper method to calculate the height of a binary tree
+    private static int height(TreeNode node) {
+        if (node == null) return -1;
+        return 1 + Math.max(height(node.left), height(node.right));
     }
 	
 

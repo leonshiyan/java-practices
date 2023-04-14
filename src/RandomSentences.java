@@ -19,7 +19,16 @@ public class RandomSentences {
      * @param args Command-line arguments (not used in this program).
      */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		while (true) {
+            System.out.print("Generated sentence: ");
+            // add method here
+            System.out.println("\n");
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                // Do nothing
+            }
+        }
 
 	}
 

@@ -12,7 +12,12 @@ public class RandomSentences {
 
     // Declare a Random object for generating random numbers
     static final Random random = new Random();
-    
+    /**
+     * Main method. Runs the program by generating and outputting one random
+     * sentence every three seconds until halted.
+     *
+     * @param args Command-line arguments (not used in this program).
+     */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

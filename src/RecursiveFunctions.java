@@ -35,7 +35,9 @@ public class RecursiveFunctions {
 	 * @param args Unused.
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		int n = 5;
+	    System.out.println("Factorial of " + n + " is: " + factorial(n));
+	    System.out.println("Fibonacci number at position " + n + " is: " + fibonacci(n));
 
 	}
 

@@ -1,4 +1,4 @@
-package RecursiveWalks;
+package FamousFractals;
 
 import java.awt.*;
 import java.awt.event.*;

@@ -13,4 +13,7 @@ public class Tape {
     public char getContent() {
         return currentCell.content;
     }
+    public void setContent(char ch) {
+        currentCell.content = ch;
+    }
 }

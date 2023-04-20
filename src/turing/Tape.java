@@ -10,5 +10,7 @@ public class Tape {
     public Cell getCurrentCell() {
         return currentCell;
     }
-
+    public char getContent() {
+        return currentCell.content;
+    }
 }

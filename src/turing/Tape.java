@@ -39,4 +39,24 @@ public class Tape {
         }
         currentCell = currentCell.next;
     }
+    
+    public String getTapeContents() {
+        Cell startCell = currentCell;
+        while (startCell.prev != null) {
+            startCell = startCell.prev;
+        }
+        StringBuilder sb = new StringBuilder();
+        boolean startAdding = false;
+        while (startCell != null) {
+            if (!startAdding && startCell.content != ' ') {
+                startAdding = true;
+            }
+            if (startAdding) {
+                sb.append(startCell.content);
+            }
+            startCell = startCell.next;
+        }
+        return sb.toString();
+    }
+    
 }

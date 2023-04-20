@@ -1,5 +1,10 @@
 package turing;
-
+/**
+ * A class representing a Turing machine tape, which is a doubly-linked list of cells.
+ * The tape is used for both input and output, and each cell can hold one character.
+ * One cell on the tape is considered to be the current cell, where the machine is located.
+ * As a Turing machine computes, it moves back and forth along the tape and the current cell changes.
+ */
 public class Tape {
     private Cell currentCell;
     

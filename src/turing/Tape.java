@@ -7,5 +7,8 @@ public class Tape {
         currentCell = new Cell();
         currentCell.content = ' ';
     }
+    public Cell getCurrentCell() {
+        return currentCell;
+    }
 
 }

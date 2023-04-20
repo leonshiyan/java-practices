@@ -1,8 +1,8 @@
-package turing;
+package TuringMachine;
 
 
 /**
- * Represents one cell on a Turing Machine tape.
+ * Represents one cell on a TuringMachine Machine tape.
  */
 public class Cell {
 	

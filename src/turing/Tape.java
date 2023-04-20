@@ -16,4 +16,13 @@ public class Tape {
     public void setContent(char ch) {
         currentCell.content = ch;
     }
+    public void moveLeft() {
+        if (currentCell.prev == null) {
+            Cell newCell = new Cell();
+            newCell.content = ' ';
+            newCell.next = currentCell;
+            currentCell.prev = newCell;
+        }
+        currentCell = currentCell.prev;
+    }
 }

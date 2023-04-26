@@ -1,4 +1,5 @@
 package Expressions;
+import java.util.Random;
 
 /**
  * A class for experimenting with expression trees.  This class includes 
@@ -36,7 +37,7 @@ public class Expressions {
 			System.out.println("   x = " + dt[i][0] + "; y = " + dt[i][1]);
 		}
 	}
-	
+
 	/**
 	 * Given an ExpNode that is the root of an expression tree, this method
 	 * makes a full copy of the tree.  The tree that is returned is constructed
@@ -152,5 +153,15 @@ public class Expressions {
 			return "(" + left.toString() + op + right.toString() + ")";
 		}
 	}
+	
+	/**
+     * Recursively creates a random expression tree of a specified maximum height.
+     * @param maxHeight the maximum height of the tree
+     * @return the root node of the expression tree
+     */
+    static ExpNode randomExpression(int maxHeight) {
+        Random rand = new Random();
+        
+    }
 
 }

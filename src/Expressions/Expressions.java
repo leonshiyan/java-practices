@@ -36,6 +36,12 @@ public class Expressions {
 		for (int i = 0; i < dt.length; i++) {
 			System.out.println("   x = " + dt[i][0] + "; y = " + dt[i][1]);
 		}
+		
+		// create and print 10 random expressions of maximum height 3
+	    for (int i = 1; i <= 10; i++) {
+	        ExpNode exp = randomExpression(3);
+	        System.out.println("Expression " + i + ": " + exp + " = " + exp.value(2.0));
+	    }
 	}
 
 	/**

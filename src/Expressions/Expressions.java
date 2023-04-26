@@ -153,15 +153,26 @@ public class Expressions {
 			return "(" + left.toString() + op + right.toString() + ")";
 		}
 	}
-	
 	/**
      * Recursively creates a random expression tree of a specified maximum height.
      * @param maxHeight the maximum height of the tree
      * @return the root node of the expression tree
      */
     static ExpNode randomExpression(int maxHeight) {
-        Random rand = new Random();
-        
+    	Random rand = new Random();
+        if (maxHeight == 0) {
+            // create a constant or variable node
+            if (rand.nextInt(2) == 0) {
+                return new ConstNode(rand.nextInt(10) - 5);
+            } else {
+                return new VariableNode();
+            }
+        } else {
+            // create a binary operator node with random left and right expressions
+            int op = rand.nextInt(4); // 0 = '+', 1 = '-', 2 = '*', 3 = '/'
+            ExpNode left = randomExpression(maxHeight - 1);
+            ExpNode right = randomExpression(maxHeight - 1);
+            return new BinOpNode("+-*/".charAt(op), left, right);
+        }
     }
-
 }

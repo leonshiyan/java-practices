@@ -13,29 +13,29 @@ public class Expressions {
 	 * The main routine tests some of the things that are defined in this class.
 	 */
 	public static void main(String[] args) {
-		System.out.println("Testing expression creation and evaluation...\n");
-		ExpNode e1 = new BinOpNode('+', new VariableNode(), new ConstNode(3));
-		ExpNode e2 = new BinOpNode('*', new ConstNode(2), new VariableNode());
-		ExpNode e3 = new BinOpNode('-', e1, e2);
-		ExpNode e4 = new BinOpNode('/', e1, new ConstNode(-3));
-		System.out.println("For x = 3:");
-		System.out.println("   " + e1 + " = " + e1.value(3));
-		System.out.println("   " + e2 + " = " + e2.value(3));
-		System.out.println("   " + e3 + " = " + e3.value(3));
-		System.out.println("   " + e4 + " = " + e4.value(3));
-		System.out.println("\nTesting copying...");
-		System.out.println("   copy of " + e1 + " gives " + copy(e1));
-		System.out.println("   copy of " + e2 + " gives " + copy(e2));
-		System.out.println("   copy of " + e3 + " gives " + copy(e3));
-		System.out.println("   copy of " + e4 + " gives " + copy(e4));
-		ExpNode e3copy = copy(e3);  // make a copy of e3, where e3.left is e1
-		((BinOpNode)e1).left = new ConstNode(17);  // make a modification to e1
-		System.out.println("   modified e3: " + e3 + "; copy should be unmodified: " + e3copy);
-		System.out.println("\nChecking test data...");
-		double[][] dt = makeTestData();
-		for (int i = 0; i < dt.length; i++) {
-			System.out.println("   x = " + dt[i][0] + "; y = " + dt[i][1]);
-		}
+//		System.out.println("Testing expression creation and evaluation...\n");
+//		ExpNode e1 = new BinOpNode('+', new VariableNode(), new ConstNode(3));
+//		ExpNode e2 = new BinOpNode('*', new ConstNode(2), new VariableNode());
+//		ExpNode e3 = new BinOpNode('-', e1, e2);
+//		ExpNode e4 = new BinOpNode('/', e1, new ConstNode(-3));
+//		System.out.println("For x = 3:");
+//		System.out.println("   " + e1 + " = " + e1.value(3));
+//		System.out.println("   " + e2 + " = " + e2.value(3));
+//		System.out.println("   " + e3 + " = " + e3.value(3));
+//		System.out.println("   " + e4 + " = " + e4.value(3));
+//		System.out.println("\nTesting copying...");
+//		System.out.println("   copy of " + e1 + " gives " + copy(e1));
+//		System.out.println("   copy of " + e2 + " gives " + copy(e2));
+//		System.out.println("   copy of " + e3 + " gives " + copy(e3));
+//		System.out.println("   copy of " + e4 + " gives " + copy(e4));
+//		ExpNode e3copy = copy(e3);  // make a copy of e3, where e3.left is e1
+//		((BinOpNode)e1).left = new ConstNode(17);  // make a modification to e1
+//		System.out.println("   modified e3: " + e3 + "; copy should be unmodified: " + e3copy);
+//		System.out.println("\nChecking test data...");
+//		double[][] dt = makeTestData();
+//		for (int i = 0; i < dt.length; i++) {
+//			System.out.println("   x = " + dt[i][0] + "; y = " + dt[i][1]);
+//		}
 		
 		// create and print 10 random expressions of maximum height 3
 	    for (int i = 1; i <= 10; i++) {

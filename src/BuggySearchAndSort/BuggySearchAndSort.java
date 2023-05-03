@@ -105,16 +105,16 @@ public class BuggySearchAndSort {
 	 * past any elements that are greater than it.
 	 */
 	public static void insertionSort(int[] array) {
-		for (int top = 1; top < array.length; top++) {
-			int temp = array[top];  // copy item that into temp variable
-			int pos = top - 1;
-			while (pos > 0 && array[pos] > temp) {
-				   // move items that are bigger than temp up one position
-				array[pos+1] = array[pos];
-				pos--;
-			}
-			array[pos] = temp;  // place temp into last vacated position
-		}
+	    for (int top = 1; top < array.length; top++) {
+	        int temp = array[top];  // copy item that into temp variable
+	        int pos = top - 1;
+	        while (pos >= 0 && array[pos] > temp) { // change the condition
+	            // move items that are bigger than temp up one position
+	            array[pos+1] = array[pos];
+	            pos--;
+	        }
+	        array[pos+1] = temp;  // place temp into last vacated position
+	    }
 	}
 	
 	/**

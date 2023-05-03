@@ -1,105 +1,73 @@
 package turing;
-/**
- * A class representing a Turing machine tape, which is a doubly-linked list of cells.
- * The tape is used for both input and output, and each cell can hold one character.
- * One cell on the tape is considered to be the current cell, where the machine is located.
- * As a Turing machine computes, it moves back and forth along the tape and the current cell changes.
- */
+import turing.Cell;
+
 public class Tape {
-    /** A pointer to the current cell on the tape. */
+
     private Cell currentCell;
-    
-    /**
-     * Constructs a new tape with a single cell that contains a blank space,
-     * and sets the current cell pointer to it.
-     */
+
     public Tape() {
-        currentCell = new Cell();
-        currentCell.content = ' ';
+        Cell newCell = new Cell();
+        newCell.content = ' ';
+        newCell.next = null;
+        newCell.prev = null;
+        currentCell = newCell;
     }
-    
-    /**
-     * Returns the pointer to the current cell on the tape.
-     * @return the pointer to the current cell
-     */
+
     public Cell getCurrentCell() {
+    // returns the pointer that points to the current cell.
         return currentCell;
     }
-    
-    /**
-     * Returns the character from the current cell on the tape.
-     * @return the character from the current cell
-     */
+
     public char getContent() {
+    // returns the char from the current cell
         return currentCell.content;
     }
-    
-    /**
-     * Changes the character in the current cell on the tape to the specified value.
-     * @param ch the new character to set in the current cell
-     */
+
     public void setContent(char ch) {
+    // changes the char in the current cell to the specified value
         currentCell.content = ch;
     }
-    
-    /**
-     * Moves the current cell one position to the left along the tape.
-     * If the current cell is the leftmost cell that exists, then a new cell
-     * is created and added to the tape at the left of the current cell, and
-     * then the current cell pointer is moved to point to the new cell.
-     * The content of the new cell is a blank space.
-     */
+
     public void moveLeft() {
+    // moves the current cell one position to the left along the tape
         if (currentCell.prev == null) {
             Cell newCell = new Cell();
             newCell.content = ' ';
+            newCell.prev = null;
             newCell.next = currentCell;
             currentCell.prev = newCell;
         }
         currentCell = currentCell.prev;
     }
-    
-    /**
-     * Moves the current cell one position to the right along the tape.
-     * If the current cell is the rightmost cell that exists, then a new cell
-     * is created and added to the tape at the right of the current cell, and
-     * then the current cell pointer is moved to point to the new cell.
-     * The content of the new cell is a blank space.
-     */
+
     public void moveRight() {
+    // moves the current cell one position to the right along the tape.
         if (currentCell.next == null) {
             Cell newCell = new Cell();
             newCell.content = ' ';
+            newCell.next = null;
             newCell.prev = currentCell;
             currentCell.next = newCell;
         }
         currentCell = currentCell.next;
     }
-    
-    /**
-     * Returns a String consisting of the characters from all the cells on the tape,
-     * read from left to right, except that leading or trailing blank characters
-     * are discarded. The current cell pointer is not moved by this method; it
-     * points to the same cell after the method is called as it did before.
-     * @return a String representing the contents of the tape
-     */
+
     public String getTapeContents() {
-        Cell startCell = currentCell;
-        while (startCell.prev != null) {
-            startCell = startCell.prev;
+    // returns a String consisting of the chars from all the cells on the tape, read from left to right, except that
+    // leading or trailing blank characters should be discarded.
+        Cell pointer = currentCell;
+        String tapeContents = "";
+
+        // Rewind to the start of the Tape
+        while (pointer.prev != null) {
+            pointer = pointer.prev;
         }
-        StringBuilder sb = new StringBuilder();
-        boolean startAdding = false;
-        while (startCell != null) {
-            if (!startAdding && startCell.content != ' ') {
-                startAdding = true;
-            }
-            if (startAdding) {
-                sb.append(startCell.content);
-            }
-            startCell = startCell.next;
+
+        while (pointer != null) {
+            tapeContents += pointer.content;
+            pointer = pointer.next;
         }
-        return sb.toString();
-    }
-    
+        tapeContents = tapeContents.trim();
+        return tapeContents;
+   }
 }

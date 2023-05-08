@@ -1,0 +1,24 @@
+This is a sample text file containing some misspelled words. Here are some examples:
+
+Helo
+Worrd
+Spellng
+Incorect
+Ccorrctions
+Tesst
+Wrok
+Mispelled
+Abreviation
+Accomodate
+Goverment
+Experiance
+Necessery
+Relevent
+Seperate
+Weird
+Rythm
+Occurence
+Dissapoint
+Apperance
+
+You can modify this text file or create your own with additional misspelled words for testing purposes.

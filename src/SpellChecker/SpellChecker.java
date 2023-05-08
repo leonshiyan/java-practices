@@ -8,6 +8,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.JFileChooser;
 
+/**
+ * A simple spell checker program that checks the spelling of words in a given file
+ * against a dictionary and suggests possible correct spellings for misspelled words.
+ */
 public class SpellChecker {
     public static void main(String[] args) {
         Set<String> dictionary = new HashSet<>();

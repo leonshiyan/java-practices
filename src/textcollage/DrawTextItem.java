@@ -20,6 +20,7 @@ public class DrawTextItem {
 	private final String string;  // The String that is drawn by this item.
 	
 	private Font font = null;
+	private int size; // Font size of the text item
 	private int x = 0;
 	private int y = 0;
 	private Color textColor = Color.BLACK;
@@ -55,6 +56,8 @@ public class DrawTextItem {
 		string = stringToDraw;
 		this.x = x;
 		this.y = y;
+		this.size = 24; // Default font size
+        this.rotationAngle = 0; // Default rotation angle
 	}
 	
 	/**
@@ -284,5 +287,16 @@ public class DrawTextItem {
 	public int getY() {
 		return y;
 	}
-
+	/**
+	 * returns the size of the current text
+	 */
+	public int getSize() {
+        return size;
+    }
+	/**
+	 * Sets the size of the current text
+	 */
+    public void setSize(int size) {
+        this.size = size;
+    }
 }

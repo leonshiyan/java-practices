@@ -14,6 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -207,7 +208,30 @@ public class DrawTextPanel extends JPanel  {
 	 */
 	private void doMenuCommand(String command) {
 		if (command.equals("Save...")) { // save all the string info to a file
-			JOptionPane.showMessageDialog(this, "Sorry, the Save command is not implemented.");
+			 File outputFile = fileChooser.getOutputFile(this, "Save Collage Data", "collage.txt");
+		        if (outputFile != null) {
+		            try (PrintWriter writer = new PrintWriter(outputFile)) {
+		                // Save background color
+		                Color backgroundColor = canvas.getBackground();
+		                writer.println(backgroundColor.getRed());
+		                writer.println(backgroundColor.getGreen());
+		                writer.println(backgroundColor.getBlue());
+
+		                // Save DrawTextItems
+		                for (DrawTextItem string : strings) {
+		                    writer.println(string.getString());
+		                    writer.println(string.getX());
+		                    writer.println(string.getY());
+		                    writer.println(string.getTextColor().getRed());
+		                    writer.println(string.getTextColor().getGreen());
+		                    writer.println(string.getTextColor().getBlue());
+		                }
+		            } catch (Exception e) {
+		                JOptionPane.showMessageDialog(this,
+		                        "Error saving collage data: " + e.getMessage(),
+		                        "Save Error", JOptionPane.ERROR_MESSAGE);
+		            }
+		        }
 		}
 		else if (command.equals("Open...")) { // read a previously saved file, and reconstruct the list of strings
 			JOptionPane.showMessageDialog(this, "Sorry, the Open command is not implemented.");

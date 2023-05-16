@@ -68,41 +68,46 @@ public class DrawTextItem {
 	 * type Graphics2D (which should not be a problem).
 	 */
 	public void draw(Graphics g) {
-		Graphics2D g2 = (Graphics2D)g.create();
-		if (font != null)
-			g2.setFont(font);
-		FontMetrics fm = g2.getFontMetrics();
-		int width = fm.stringWidth(string);
-		int height = fm.getAscent() + fm.getDescent();
-		g2.translate(x,y);
-		if (magnification != 1) {
-		    float pixelSize = 1/(float)magnification;
-			g2.setStroke( new BasicStroke(pixelSize) ); // magnification won't apply to border
-			g2.scale(magnification,magnification);
-		}
-		if (rotationAngle > 0)
-			g2.rotate( -Math.PI * (rotationAngle / 180));
-		Color colorToUseForText = textColor;
-		if (colorToUseForText == null)
-			colorToUseForText = g2.getColor();
-		if (background != null) {
-			if (backgroundTransparency == 0)
-				g2.setColor(background);
-			else
-				g2.setColor( new Color( background.getRed(), background.getGreen(), background.getBlue(),
-						(int)(255*(1-backgroundTransparency))) );
-			g2.fillRect(-width/2 - 3, -height/2 - 3, width + 6, height + 6);
-		}
-		if (textTransparency == 0)
-			g2.setColor(colorToUseForText);
-		else
-			g2.setColor( new Color( colorToUseForText.getRed(), 
-					colorToUseForText.getGreen(), colorToUseForText.getBlue(),
-					(int)(255*(1-textTransparency)) ) );
-		if (border)
-			g2.drawRect(-width/2 -3, -height/2 - 3, width + 6, height + 6);
-		g2.drawString(string,-width/2, -height/2 + fm.getAscent());
+	    Graphics2D g2 = (Graphics2D) g.create();
+	    if (font != null)
+	        g2.setFont(font.deriveFont((float) size)); // Set the font size
+	    FontMetrics fm = g2.getFontMetrics();
+	    int width = fm.stringWidth(string);
+	    int height = fm.getAscent() + fm.getDescent();
+	    g2.translate(x, y);
+	    if (magnification != 1) {
+	        float pixelSize = 1 / (float) magnification;
+	        g2.setStroke(new BasicStroke(pixelSize)); // magnification won't apply to border
+	        g2.scale(magnification, magnification);
+	    }
+	    if (rotationAngle > 0)
+	        g2.rotate(-Math.PI * (rotationAngle / 180));
+	    Color colorToUseForText = textColor;
+	    if (colorToUseForText == null)
+	        colorToUseForText = g2.getColor();
+	    if (background != null) {
+	        if (backgroundTransparency == 0)
+	            g2.setColor(background);
+	        else
+	            g2.setColor(new Color(background.getRed(), background.getGreen(), background.getBlue(),
+	                    (int) (255 * (1 - backgroundTransparency))));
+	        g2.fillRect(-width / 2 - 3, -height / 2 - 3, width + 6, height + 6);
+	    }
+	    if (textTransparency == 0)
+	        g2.setColor(colorToUseForText);
+	    else
+	        g2.setColor(new Color(colorToUseForText.getRed(),
+	                colorToUseForText.getGreen(), colorToUseForText.getBlue(),
+	                (int) (255 * (1 - textTransparency))));
+	    if (border)
+	        g2.drawRect(-width / 2 - 3, -height / 2 - 3, width + 6, height + 6);
+	    g2.drawString(string, -width / 2, -height / 2 + fm.getAscent());
+	    g2.dispose(); // Dispose the Graphics2D object
 	}
+
+
+
+
 
 	/**
 	 * Returns the string that is drawn by this DrawTextItem.  The
@@ -288,15 +293,18 @@ public class DrawTextItem {
 		return y;
 	}
 	/**
-	 * returns the size of the current text
+	 * Set the size of the text item.
+	 * @param size the size of the text item
+	 */
+	public void setSize(int size) {
+	    this.size = size;
+	}
+
+	/**
+	 * Returns the size of the text item.
+	 * @return the size of the text item
 	 */
 	public int getSize() {
-        return size;
-    }
-	/**
-	 * Sets the size of the current text
-	 */
-    public void setSize(int size) {
-        this.size = size;
-    }
+	    return size;
+	}
 }

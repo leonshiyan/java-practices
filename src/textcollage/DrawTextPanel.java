@@ -55,7 +55,8 @@ public class DrawTextPanel extends JPanel  {
 	private JMenuBar menuBar; // a menu bar with command that affect this panel
 	private MenuHandler menuHandler; // a listener that responds whenever the user selects a menu command
 	private JMenuItem undoMenuItem;  // the "Remove Item" command from the edit menu
-	
+	private DrawTextItem selectedString; // Reference to the currently selected string
+
 	
 	/**
 	 * An object of type Canvas is used for the drawing area.
@@ -133,21 +134,14 @@ public class DrawTextPanel extends JPanel  {
 			input.setText("Hello World!");
 			text = "Hello World!";
 		}
-		DrawTextItem s = new DrawTextItem( text, e.getX(), e.getY() );
-		s.setTextColor(currentTextColor);  // Default is null, meaning default color of the canvas (black).
-		
-//   SOME OTHER OPTIONS THAT CAN BE APPLIED TO TEXT ITEMS:
-//		s.setFont( new Font( "Serif", Font.ITALIC + Font.BOLD, 12 ));  // Default is null, meaning font of canvas.
-//		s.setMagnification(3);  // Default is 1, meaning no magnification.
-//		s.setBorder(true);  // Default is false, meaning don't draw a border.
-//		s.setRotationAngle(25);  // Default is 0, meaning no rotation.
-//		s.setTextTransparency(0.3); // Default is 0, meaning text is not at all transparent.
-//		s.setBackground(Color.BLUE);  // Default is null, meaning don't draw a background area.
-//		s.setBackgroundTransparency(0.7);  // Default is 0, meaning background is not transparent.
-		
-	    strings.add(s); // Add the newly created DrawTextItem to the ArrayList
-		undoMenuItem.setEnabled(true);
-		canvas.repaint();
+		DrawTextItem s = new DrawTextItem(text, e.getX(), e.getY());
+	    s.setTextColor(currentTextColor);
+	    s.setSize(24); // Default font size
+	    s.setRotationAngle(0); // Default rotation angle
+	    strings.add(s); // Add the newly created string to the ArrayList
+	    selectedString = s; // Select the newly created string
+	    undoMenuItem.setEnabled(true);
+	    canvas.repaint();
 	}
 	
 	/**
@@ -198,6 +192,13 @@ public class DrawTextPanel extends JPanel  {
 			JMenuItem bgColorItem = new JMenuItem("Set Background Color...");
 			bgColorItem.addActionListener(menuHandler);
 			optionsMenu.add(bgColorItem);
+			// New menu items for setting size and rotation angle
+	        JMenuItem setSizeItem = new JMenuItem("Set Size...");
+	        setSizeItem.addActionListener(menuHandler);
+	        editMenu.add(setSizeItem);
+	        JMenuItem setRotationItem = new JMenuItem("Set Rotation Angle...");
+	        setRotationItem.addActionListener(menuHandler);
+	        editMenu.add(setRotationItem);
 			
 		}
 		return menuBar;
@@ -316,8 +317,36 @@ public class DrawTextPanel extends JPanel  {
 				JOptionPane.showMessageDialog(this, 
 						"Sorry, an error occurred while trying to save the image:\n" + e);
 			}
-		}
+		}else if (command.equals("Set Size...")) {
+	        if (selectedString != null) {
+	            String input = JOptionPane.showInputDialog(this, "Enter the font size for the selected string:");
+	            if (input != null) {
+	                try {
+	                    int size = Integer.parseInt(input);
+	                    selectedString.setSize(size);
+	                    canvas.repaint();
+	                } catch (NumberFormatException e) {
+	                    JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid font size.");
+	                }
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "No string selected. Select a string first.");
+	        }
+	    } else if (command.equals("Set Rotation Angle...")) {
+	        if (selectedString != null) {
+	            String input = JOptionPane.showInputDialog(this, "Enter the rotation angle (in degrees) for the selected string:");
+	            if (input != null) {
+	                try {
+	                    double angle = Double.parseDouble(input);
+	                    selectedString.setRotationAngle(angle);
+	                    canvas.repaint();
+	                } catch (NumberFormatException e) {
+	                    JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid rotation angle.");
+	                }
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "No string selected. Select a string first.");
+	        }
+	    }
 	}
-	
-
 }

@@ -24,18 +24,27 @@ public class DirectoryList {
       directory = new File(directoryName);
 
       if (directory.isDirectory() == false) {
-         if (directory.exists() == false)
-            System.out.println("There is no such directory!");
-         else
-            System.out.println("That file is not a directory.");
-      }
-      else {
-         files = directory.list();
-         System.out.println("Files in directory \"" + directory + "\":");
-         for (int i = 0; i < files.length; i++)
-            System.out.println("   " + files[i]);
+          if (directory.exists() == false)
+              System.out.println("There is no such directory!");
+          else
+              System.out.println("That file is not a directory.");
+      } else {
+          listFiles(directory);
       }
 
    } // end main()
-
+   
+   private static void listFiles(File directory) {
+       File[] files = directory.listFiles();
+       if (files != null) {
+           for (File file : files) {
+               if (file.isDirectory()) {
+                   System.out.println("Directory: " + file.getAbsolutePath());
+                   listFiles(file); // Recursive call to handle subdirectories
+               } else {
+                   System.out.println("File: " + file.getAbsolutePath());
+               }
+           }
+       }
+   }
 } // end class DirectoryList

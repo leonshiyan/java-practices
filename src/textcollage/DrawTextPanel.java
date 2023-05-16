@@ -16,6 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JColorChooser;
@@ -233,9 +234,39 @@ public class DrawTextPanel extends JPanel  {
 		            }
 		        }
 		}
-		else if (command.equals("Open...")) { // read a previously saved file, and reconstruct the list of strings
-			JOptionPane.showMessageDialog(this, "Sorry, the Open command is not implemented.");
-			canvas.repaint(); // (you'll need this to make the new list of strings take effect)
+		// Open a file and restore the contents of the drawing area
+		else if (command.equals("Open...")) {
+		    File file = fileChooser.getInputFile(this, "Open File");
+		    if (file != null) {
+		        try {
+		            Scanner scanner = new Scanner(file);
+		            Color backgroundColor = new Color(Integer.parseInt(scanner.nextLine()),
+		                    Integer.parseInt(scanner.nextLine()),
+		                    Integer.parseInt(scanner.nextLine()));
+		            canvas.setBackground(backgroundColor); // Restore background color
+
+		            strings.clear(); // Clear the current strings
+
+		            while (scanner.hasNextLine()) {
+		                String text = scanner.nextLine();
+		                int posX = Integer.parseInt(scanner.nextLine());
+		                int posY = Integer.parseInt(scanner.nextLine());
+		                Color textColor = new Color(Integer.parseInt(scanner.nextLine()),
+		                        Integer.parseInt(scanner.nextLine()),
+		                        Integer.parseInt(scanner.nextLine()));
+		                DrawTextItem string = new DrawTextItem(text, posX, posY);
+		                string.setTextColor(textColor);
+		                strings.add(string); // Restore each string
+		            }
+
+		            scanner.close();
+		            undoMenuItem.setEnabled(!strings.isEmpty());
+		            canvas.repaint();
+		            JOptionPane.showMessageDialog(this, "File opened successfully.");
+		        } catch (Exception e) {
+		            JOptionPane.showMessageDialog(this, "Error opening file: " + e.getMessage());
+		        }
+		    }
 		}
 		else if (command.equals("Clear")) {  // remove all strings
 			strings.clear(); // Remove all strings from the ArrayList

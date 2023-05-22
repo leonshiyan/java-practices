@@ -21,7 +21,10 @@ public class SimpleServer {
             while (true) {
                 Socket connection = serverSocket.accept();
                 System.out.println("\nConnection from " + connection.getRemoteSocketAddress());
-                handleConnection(connection);
+
+                // Create a new thread to handle the connection
+                ConnectionThread thread = new ConnectionThread(connection);
+                thread.start();
             }
         } catch (Exception e) {
             System.out.println("Server socket shut down unexpectedly!");
@@ -30,12 +33,24 @@ public class SimpleServer {
         }
     }
 
+    private static class ConnectionThread extends Thread {
+        private Socket connection;
+
+        public ConnectionThread(Socket connection) {
+            this.connection = connection;
+        }
+
+        public void run() {
+            handleConnection(connection);
+        }
+    }
+
     private static void handleConnection(Socket connection) {
         try (
-            InputStream inStream = connection.getInputStream();
-            OutputStream outStream = connection.getOutputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
-            PrintWriter writer = new PrintWriter(outStream);
+        		InputStream inStream = connection.getInputStream();
+                OutputStream outStream = connection.getOutputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inStream));
+                PrintWriter writer = new PrintWriter(outStream);
         ) {
             // Read the request from the input stream
             String requestLine = reader.readLine();
